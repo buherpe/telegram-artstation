@@ -1,0 +1,33 @@
+{
+  "name": "artstation - telegram bot :3",
+  "description": "artstation extention for posting items to telegram channel",
+  "version": "0.0.1",
+  "icons": {
+    "16": "icon/icon16.png",
+    "32": "icon/icon32.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
+  },
+  "manifest_version": 3,
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.artstation.com/*"
+      ],
+      "js": [
+        "lib/firebase-compat.js",
+        "lib/jquery-3.6.1.min.js",
+        "inject.js"
+      ]
+    }
+  ],
+  "host_permissions": [
+    "https://www.artstation.com/"
+  ]
+}
