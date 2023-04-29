@@ -4,10 +4,6 @@ const maxMinuteDelay = 5; // Максимальное время в минута
 const {logger} = require('./logger');
 
 const util = {
-  scheduled_post_sending: true,
-  /**
-   * Функция старта функции
-   * */
   setRandomInterval: (intervalFunction) => {
     const minDelay = minMinuteDelay * 60000;
     const maxDelay = maxMinuteDelay * 60000;
@@ -43,11 +39,10 @@ const util = {
 
     return {
       clear() {
-        this.scheduled_post_sending = false;
-        logger.info(`отправка постов остановленна`);
+        logger.info(`отправка постов остановлена`);
         clearTimeout(timeout)
       },
-
+      scheduledPostingActive: true
     };
   },
   scheduledPostSending() {

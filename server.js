@@ -4,12 +4,21 @@ const {util} = require('./util/util');
 
 (async () => {
   logger.info("бот был запущен на сервере");
-  scheduledPosting = util.setRandomInterval(() => util.scheduledPostSending());
+  let scheduledPosting = util.setRandomInterval(() => util.scheduledPostSending());
   telegram.command('stop', (ctx) => {
-    scheduledPosting.clear();
+    if (scheduledPosting.scheduledPostingActive) {
+      scheduledPosting.clear();
+      scheduledPosting.scheduledPostingActive = false;
+    } else {
+      logger.warn("отправка постов уже остановлена")
+    }
   })
   telegram.command('start', (ctx) => {
-    scheduledPosting = util.setRandomInterval(() => util.scheduledPostSending());
+    if (!scheduledPosting.scheduledPostingActive) {
+      scheduledPosting = util.setRandomInterval(() => util.scheduledPostSending());
+    } else {
+      logger.warn("отправка постов уже запущенна")
+    }
   })
   telegram.on('text', (ctx, next) => {
     ctx.deleteMessage();
