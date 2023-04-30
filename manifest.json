@@ -21,7 +21,6 @@
         "*://*.artstation.com/*"
       ],
       "js": [
-        "lib/firebase-compat.js",
         "lib/jquery-3.6.1.min.js",
         "inject.js"
       ]
