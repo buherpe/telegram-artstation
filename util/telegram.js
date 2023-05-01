@@ -5,12 +5,14 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
 /** проверка на админа */
 bot.use(async (ctx, next) => {
-  // console.time(`Processing update ${ctx.update.update_id}`);
-  if (ctx.message.chat.id == process.env.TELEGRAM_USER_ID) {
-    await next() // runs next middleware
-  } else {
-    ctx.deleteMessage();
-    ctx.sendMessage("you can not use this bot. author of this bot is https://t.me/thatoranzhevyy");
+  if (ctx.message.chat) {
+    // console.time(`Processing update ${ctx.update.update_id}`);
+    if (ctx.message.chat.id == process.env.TELEGRAM_USER_ID) {
+      await next() // runs next middleware
+    } else {
+      ctx.deleteMessage();
+      ctx.sendMessage("you can not use this bot. author of this bot is https://t.me/thatoranzhevyy");
+    }
   }
   // runs after next middleware finishes
   // console.timeEnd(`Processing update ${ctx.update.update_id}`);

@@ -1,5 +1,5 @@
-const minMinuteDelay = 1; // Минимально время в минутах рандома
-const maxMinuteDelay = 2; // Максимальное время в минутах рандома
+const minMinuteDelay = 120; // Минимально время в минутах рандома
+const maxMinuteDelay = 180; // Максимальное время в минутах рандома
 const {artwork} = require('./firebase');
 
 const {logger} = require('./logger');
