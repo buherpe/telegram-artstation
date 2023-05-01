@@ -1,5 +1,6 @@
-const minMinuteDelay = 2; // Минимально время в минутах рандома
-const maxMinuteDelay = 5; // Максимальное время в минутах рандома
+const minMinuteDelay = 1; // Минимально время в минутах рандома
+const maxMinuteDelay = 2; // Максимальное время в минутах рандома
+const {artwork} = require('./firebase');
 
 const {logger} = require('./logger');
 
@@ -46,7 +47,19 @@ const util = {
     };
   },
   scheduledPostSending() {
-    logger.info("test")
+    artwork.getArtworkFromDB().then((artworkFromDB) => {
+      if (artworkFromDB) {
+        artwork.getArtworkByHash(artworkFromDB.id).then((artworkByHash) => {
+          if (Object.keys(artworkByHash).length !== 0) {
+            artwork.postArtworkToTelegramGroup(artworkByHash, artworkFromDB);
+          } else {
+            artwork.deleteArtworkFromDB(artworkFromDB.id).then(() => this.scheduledPostSending());
+          }
+        });
+      } else {
+        this.scheduledPostSending();
+      }
+    });
   }
 }
 

@@ -17,5 +17,8 @@ bot.use(async (ctx, next) => {
 })
 
 bot.sendLogMessage = (message) => bot.telegram.sendMessage(process.env.TELEGRAM_USER_ID, message);
+bot.sendPrivatePost = (data) => bot.telegram.sendMediaGroup(process.env.TELEGRAM_USER_ID, data);
+bot.sendPrivateMassage = (msg) => bot.telegram.sendMessage(process.env.TELEGRAM_USER_ID, msg);
+bot.sendPost = (data) => bot.telegram.sendMediaGroup(process.env.TELEGRAM_GROUP_ID, data);
 
 exports.telegram = bot;

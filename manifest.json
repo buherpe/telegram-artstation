@@ -18,7 +18,7 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*.artstation.com/*"
+        "*://artstation.com/*"
       ],
       "js": [
         "lib/jquery-3.6.1.min.js",
@@ -27,6 +27,6 @@
     }
   ],
   "host_permissions": [
-    "https://www.artstation.com/"
+    "https://www.artstation.com/*"
   ]
 }
